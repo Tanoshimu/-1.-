@@ -1,0 +1,15 @@
+public class Main {
+    public static void main(String[] args) {
+        String str = "AaBbCcDd"; // Исходная строка
+        
+        System.out.print("Заглавные буквы: ");
+        for (int i = 0; i < str.length(); i += 2) {  // Четные позиции (0, 2, 4...)
+            System.out.print(str.charAt(i));
+        }
+        
+        System.out.print("\nСтрочные буквы: ");
+        for (int i = 1; i < str.length(); i += 2) {  // Нечетные позиции (1, 3, 5...)
+            System.out.print(str.charAt(i));
+        }
+    }
+}
