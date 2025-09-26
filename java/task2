@@ -1,0 +1,88 @@
+import java.util.HashSet;
+
+// Узел односвязного списка
+class ListNode {
+    char data;
+    ListNode next;
+    
+    ListNode(char data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Main {
+    
+    // Функция для проверки наличия повторяющихся элементов
+    public static boolean hasDuplicates(ListNode head) {
+        HashSet<Character> seen = new HashSet<>();
+        ListNode current = head;
+        
+        while (current != null) {
+            // Если элемент уже встречался, возвращаем true
+            if (seen.contains(current.data)) {
+                return true;
+            }
+            // Добавляем элемент в множество
+            seen.add(current.data);
+            current = current.next;
+        }
+        return false; // Повторов не найдено
+    }
+    
+    // Вспомогательная функция для создания списка из массива
+    public static ListNode createList(char[] values) {
+        if (values.length == 0) return null;
+        
+        ListNode head = new ListNode(values[0]);
+        ListNode current = head;
+        
+        for (int i = 1; i < values.length; i++) {
+            current.next = new ListNode(values[i]);
+            current = current.next;
+        }
+        return head;
+    }
+    
+    // Вспомогательная функция для печати списка
+    public static void printList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.data);
+            if (current.next != null) {
+                System.out.print(" -> ");
+            }
+            current = current.next;
+        }
+        System.out.println(" -> NULL");
+    }
+
+    public static void main(String[] args) {
+        // Создаем тестовый список с повторяющимся элементом
+        char[] values = {'a', 'b', 'c', 'a', 'd'};
+        ListNode head = createList(values);
+        
+        System.out.print("Список: ");
+        printList(head);
+        
+        // Проверяем наличие повторов
+        if (hasDuplicates(head)) {
+            System.out.println("В списке есть повторяющиеся элементы");
+        } else {
+            System.out.println("В списке нет повторяющихся элементов");
+        }
+        
+        // Тест со списком без повторов
+        char[] values2 = {'x', 'y', 'z', 'w'};
+        ListNode head2 = createList(values2);
+        
+        System.out.print("\nСписок без повторов: ");
+        printList(head2);
+        
+        if (hasDuplicates(head2)) {
+            System.out.println("В списке есть повторяющиеся элементы");
+        } else {
+            System.out.println("В списке нет повторяющихся элементов");
+        }
+    }
+}
